@@ -3,6 +3,8 @@ set -eu
 
 rm -f gstream-dr-hi.log
 
+tail --pid $$ -F gstream-dr-hi.log &
+
 gst-launch-1.0 rtspsrc protocols=tcp \
 location='rtsp://driveway:kPaWrZG8A9@192.168.21.61:8654/video1_unicast' \
 latency=120 buffer-mode=3 connection-speed=2000 \
