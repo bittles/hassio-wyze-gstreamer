@@ -1,0 +1,40 @@
+version: '3.3'
+services:
+    gst-driveway-hi:
+        image: gst-driveway-hi
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+        container_name: 'gst-driveway-hi'
+        restart: unless-stopped
+
+    gst-driveway-lo:
+        image: gst-driveway-lo
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+        container_name: 'gst-driveway-lo'
+        restart: unless-stopped
+
+    gst-backyard-hi:
+        image: gst-backyard-hi
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+        container_name: 'gst-backyard-hi'
+        restart: unless-stopped
+
+    gst-backyard-lo:
+        image: gst-backyard-lo
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+        container_name: 'gst-backyard-lo'
+        restart: unless-stopped
+
+networks:
+    host:

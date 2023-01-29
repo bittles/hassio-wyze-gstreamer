@@ -1,0 +1,11 @@
+services:
+    gst-driveway-hi:
+        image: gst-driveway-hi
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+        container_name: 'gst-driveway-hi'
+        restart: unless-stopped
+networks:
+    host:
