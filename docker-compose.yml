@@ -6,7 +6,7 @@ services:
             - host
         volumes:
             - '/etc/localtime:/etc/localtime:ro'
-            - './rootfs/app/backyard-hi-run.sh:/app/run.sh'
+            - './app/backyard-hi-run.sh:/app/run.sh'
         container_name: 'gst-by-hi'
         restart: unless-stopped
     gst-by-lo:
@@ -15,7 +15,7 @@ services:
             - host
         volumes:
             - '/etc/localtime:/etc/localtime:ro'
-            - './rootfs/app/backyard-lo-run.sh:/app/run.sh'
+            - './app/backyard-lo-run.sh:/app/run.sh'
         container_name: 'gst-by-lo'
         restart: unless-stopped
     gst-dr-hi:
@@ -24,7 +24,7 @@ services:
             - host
         volumes:
             - '/etc/localtime:/etc/localtime:ro'
-            - './rootfs/app/driveway-hi-run.sh:/app/run.sh'
+            - './app/driveway-hi-run.sh:/app/run.sh'
         container_name: 'gst-dr-hi'
         restart: unless-stopped
     gst-dr-lo:
@@ -33,7 +33,7 @@ services:
             - host
         volumes:
             - '/etc/localtime:/etc/localtime:ro'
-            - './rootfs/app/driveway-lo-run.sh:/app/run.sh'
+            - './app/driveway-lo-run.sh:/app/run.sh'
         container_name: 'gst-dr-lo'
         restart: unless-stopped
 networks:
