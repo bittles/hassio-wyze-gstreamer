@@ -1,13 +1,40 @@
 version: '3.3'
 services:
-    gst-wyze:
+    gst-by-hi:
         image: gst-wyze
         networks:
             - host
         volumes:
             - '/etc/localtime:/etc/localtime:ro'
-        container_name: 'gst-wyze'
+            - '/app/backyard-hi-run.sh:/app/init.sh'
+        container_name: 'gst-by-hi'
         restart: unless-stopped
-
+    gst-by-lo:
+        image: gst-wyze
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+            - '/app/backyard-lo-run.sh:/app/init.sh'
+        container_name: 'gst-by-lo'
+        restart: unless-stopped
+    gst-dr-hi:
+        image: gst-wyze
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+            - '/app/driveway-hi-run.sh:/app/init.sh'
+        container_name: 'gst-dr-hi'
+        restart: unless-stopped
+    gst-dr-lo:
+        image: gst-wyze
+        networks:
+            - host
+        volumes:
+            - '/etc/localtime:/etc/localtime:ro'
+            - '/app/driveway-lo-run.sh:/app/init.sh'
+        container_name: 'gst-lo-hi'
+        restart: unless-stopped
 networks:
     host:
