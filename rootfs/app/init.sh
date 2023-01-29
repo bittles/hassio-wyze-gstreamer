@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -eu
 
 bash ./backyard-hi-run.sh &
 bash ./backyard-lo-run.sh &
