@@ -1,1 +1,1 @@
-docker build -t gst-wyze .
+docker build -t bittles999/gst-wyze .

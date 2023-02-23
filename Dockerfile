@@ -1,4 +1,5 @@
-FROM restreamio/gstreamer:aarch64-latest-prod
+#FROM restreamio/gstreamer:aarch64-latest-prod
+FROM bittles999/gstreamer-ubuntu
 
 COPY app/ /app
 RUN chmod a+x /app/*

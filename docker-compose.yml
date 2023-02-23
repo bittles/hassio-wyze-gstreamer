@@ -1,7 +1,7 @@
 version: '3.3'
 services:
     gst-by-hi:
-        image: gst-wyze
+        image: bittles999/gst-wyze
         networks:
             - host
         volumes:
@@ -10,7 +10,7 @@ services:
         container_name: 'gst-by-hi'
         restart: unless-stopped
     gst-by-lo:
-        image: gst-wyze
+        image: bittles999/gst-wyze
         networks:
             - host
         volumes:
@@ -19,7 +19,7 @@ services:
         container_name: 'gst-by-lo'
         restart: unless-stopped
     gst-dr-hi:
-        image: gst-wyze
+        image: bittles999/gst-wyze
         networks:
             - host
         volumes:
@@ -28,7 +28,7 @@ services:
         container_name: 'gst-dr-hi'
         restart: unless-stopped
     gst-dr-lo:
-        image: gst-wyze
+        image: bittles999/gst-wyze
         networks:
             - host
         volumes:
