@@ -1,0 +1,11 @@
+name: Wyze Gstreamer RTSP
+description: RTSP Server for Wyze
+url: https://github.com/bittles/eufyp2p-gst
+arch: 
+  - aarch64
+slug: gstreamer-wyze
+version: 0.1
+init: false
+startup: application
+host_network: true
+ingress: false
