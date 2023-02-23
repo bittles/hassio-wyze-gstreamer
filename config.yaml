@@ -9,3 +9,4 @@ init: false
 startup: application
 host_network: true
 ingress: false
+image: bittles999/hass-gstreamer-wyze
