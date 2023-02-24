@@ -1,6 +1,6 @@
 name: Wyze Gstreamer RTSP
 description: RTSP Server for Wyze
-url: https://github.com/bittles/eufyp2p-gst
+url: https://github.com/bittles/hassio-wyze-gstreamer
 arch: 
   - aarch64
 slug: gstreamer-wyze
