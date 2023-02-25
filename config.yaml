@@ -29,6 +29,17 @@ schema:
 
 
 options:
-  rtsp_simple_server_ip: 127.0.0.1
-  rtsp_simple_server_port: 8554
-  
+  rtsp-simple-server-ip: 127.0.0.1
+  rtsp-simple-server-port: 8554
+  cam1-ip: null
+  cam1-rtsp-port: null
+  cam1-username: null
+  cam1-password: null
+  cam1-rtsp-ss-hi-res-path: null
+  cam1-rtsp-ss-lo-res-path: null
+  cam2-ip: null
+  cam2-rtsp-port: null
+  cam2-username: null
+  cam2-password: null
+  cam2-rtsp-ss-hi-res-path: null
+  cam2-rtsp-ss-lo-res-path: null
