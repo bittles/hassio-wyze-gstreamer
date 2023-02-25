@@ -19,12 +19,12 @@ schema:
   cam1-password: str
   cam1-rtsp-ss-hi-res-path: str
   cam1-rtsp-ss-lo-res-path: str
-  cam2-ip: match(([0-9])+(.+))?
-  cam2-rtsp-port: match(([0-9]))?
-  cam2-username: str?
-  cam2-password: str?
-  cam2-rtsp-ss-hi-res-path: str?
-  cam2-rtsp-ss-lo-res-path: str?
+  cam2-ip: match(([0-9])+(.+))
+  cam2-rtsp-port: match(([0-9]))
+  cam2-username: str
+  cam2-password: str
+  cam2-rtsp-ss-hi-res-path: str
+  cam2-rtsp-ss-lo-res-path: str
 
 
 
