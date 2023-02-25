@@ -1,3 +1,12 @@
+# 0.36
+- Increase opus frame size ms from 40 to 60 in hi res streams
+
+# 0.35
+- Add  audio/x-raw,channels=1 to pipeline so opusenc doesn't try to transcode 2 channels
+
+# 0.34
+- Add ntp-time-source=3 to rtspclientsink
+
 # 0.33
 - Fix config
 
