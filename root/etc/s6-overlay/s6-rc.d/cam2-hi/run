@@ -4,13 +4,13 @@ set -eu
 bashio::log.info "Starting Cam2 Hi Res Stream"
 # Create main config
 
-RTSP_SIMPLE_SERVER_IP=$(bashio::config 'rtsp-simple-server-ip')
-RTSP_SIMPLE_SERVER_PORT=$(bashio::config 'rtsp-simple-server-port')
-CAM2_IP=$(bashio::config 'cam2-ip')
-CAM2_RTSP_PORT=$(bashio::config 'cam2-rtsp-port')
-CAM2_USERNAME=$(bashio::config 'cam2-username')
-CAM2_PASSWORD=$(bashio::config 'cam2-password')
-CAM2_RTSP_SS_HI_RES_PATH=$(bashio::config 'cam2-rtsp-ss-hi-res-path')
+RTSP_SIMPLE_SERVER_IP=$(bashio::config 'rtsp_simple_server_ip')
+RTSP_SIMPLE_SERVER_PORT=$(bashio::config 'rtsp_simple_server_port')
+CAM2_IP=$(bashio::config 'cam2_ip')
+CAM2_RTSP_PORT=$(bashio::config 'cam2_rtsp_port')
+CAM2_USERNAME=$(bashio::config 'cam2_username')
+CAM2_PASSWORD=$(bashio::config 'cam2_password')
+CAM2_RTSP_SS_HI_RES_PATH=$(bashio::config 'cam2_rtsp_ss_hi_res_path')
 
 rm -f gstream-cam2-hi.log
 
