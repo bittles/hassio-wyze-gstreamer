@@ -4,9 +4,31 @@ url: https://github.com/bittles/hassio-wyze-gstreamer
 arch: 
   - aarch64
 slug: gstreamer-wyze
-version: 0.2
+version: 0.3
 init: false
 startup: application
 host_network: true
 ingress: false
 image: bittles999/hass-gstreamer-wyze
+schema:
+  rtsp-simple-server-ip: match(([0-9])+(.+))
+  rtsp-simple-server-port: match(([0-9]))
+  cam1-ip: match(([0-9])+(.+))
+  cam1-rtsp-port: match(([0-9]))
+  cam1-username: str
+  cam1-password: str
+  cam1-rtsp-ss-hi-res-path: str
+  cam1-rtsp-ss-lo-res-path: str
+  cam2-ip: match(([0-9])+(.+))?
+  cam2-rtsp-port: match(([0-9]))?
+  cam2-username: str?
+  cam2-password: str?
+  cam2-rtsp-ss-hi-res-path: str?
+  cam2-rtsp-ss-lo-res-path: str?
+
+
+
+options:
+  rtsp_simple_server_ip: 127.0.0.1
+  rtsp_simple_server_port: 8554
+  
