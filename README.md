@@ -1,5 +1,5 @@
-# HASS Addon for Wyze V3 cams with wz_mini_hacks using Gstreamer 1.22
-Gstreamer pipelines setup to only work with two cams.  Both cams and both resolution stream pipelines will try to launch so if you have less than one camera I wouldn't use this addon yet, and if you have more than two then you only get two for now.  Not sure yet how to make it configurable for number of cams without restructuring the s6 services.
+# HASS Addon for Wyze V3 cams with wz_mini_hacks using Gstreamer 1.22 (for arm64 only)
+Gstreamer pipelines setup to only work with two cams for now.  Both cams and both resolution stream pipelines will try to launch so if you have less than one camera I wouldn't use this addon yet, and if you have more than two then you only get two for now.  Not sure yet how to make it configurable for number of cams without restructuring the s6 services.
 
 Set cam1 and cam2 parameters from wz_mini_hacks. Then set ip, port and path for output (eg RTSP simple server). ie. rtsp://{rtsp_simple_server_ip}:{rtsp_simple_server_port}/{rtsp_simple_server_pathname}. 
 
