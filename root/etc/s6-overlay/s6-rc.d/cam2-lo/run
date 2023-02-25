@@ -28,6 +28,6 @@ name=pay t. ! queue ! \
 capsfilter caps="application/x-rtp,media=audio,clock-rate=8000,encoding-name=L16" ! \
 rtpL16depay ! queue ! audioconvert ! audio/x-raw,channels=1 ! queue ! \
 volume volume=1.5 ! audioresample ! \
-opusenc audio-type=2051 bandwidth=-1000 \
+opusenc audio-type=2051 \
 bitrate=64000 frame-size=60 ! queue ! \
 pay. -e > gstream-cam2-lo.log
