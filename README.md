@@ -24,7 +24,8 @@ Repeat steps for cam2 options.
 Volume is boosted 1.5x since I didn't really find the default volume loud enough.  The slight 120 and 100 ms latency seemed to make streams nice and stable up to 1000 kb bitrate set in wz_mini.  With FFmpeg I was only able to get stable streams with the bitrate set to 500 kb.  Opus used for audio codec.
 
 ### Gsreamer pipeline for hi res stream:
-```gst-launch-1.0 rtspsrc protocols=tcp \
+```
+gst-launch-1.0 rtspsrc protocols=tcp \
 location=rtsp://${CAM2_USERNAME}:${CAM2_PASSWORD}@${CAM2_IP}:${CAM2_RTSP_PORT}/video1_unicast \
 latency=120 buffer-mode=3 connection-speed=2000 add-reference-timestamp-meta=true \
 name=t t. ! queue ! \
@@ -38,10 +39,12 @@ rtpL16depay ! queue ! audioconvert ! queue ! \
 volume volume=1.5 ! audioresample ! \
 opusenc audio-type=2051 bandwidth=-1000 \
 bitrate=64000 frame-size=40 ! queue ! \
-pay. -e```
+pay. -e
+```
 
 ### Pipeline for lo res (similar but audio sample rate in wz_mini is lower):
-```gst-launch-1.0 rtspsrc protocols=tcp \
+```
+gst-launch-1.0 rtspsrc protocols=tcp \
 location=rtsp://${CAM2_USERNAME}:${CAM2_PASSWORD}@${CAM2_IP}:${CAM2_RTSP_PORT}/video2_unicast \
 latency=100 buffer-mode=3 connection-speed=1000 add-reference-timestamp-meta=true \
 name=t t. ! queue ! \
@@ -55,4 +58,5 @@ rtpL16depay ! queue ! audioconvert ! queue ! \
 volume volume=1.5 ! audioresample ! \
 opusenc audio-type=2051 bandwidth=-1000 \
 bitrate=64000 frame-size=60 ! queue ! \
-pay. -e```
+pay. -e
+```
