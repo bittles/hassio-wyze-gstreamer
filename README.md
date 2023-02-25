@@ -21,7 +21,7 @@ So if your rtsp simple server is at 192.168.1.50 and the rtsp port is 8554, and 
 Repeat steps for cam2 options.
 
 ## Gstreamer pipelines
-Volume is boosted 1.5x since I didn't really find the default volume loud enough.  The slight 120 and 100 ms latency seemed to make streams nice and stable up to 1000 kb bitrate set in wz_mini.  With FFmpeg I was only able to get stable streams with the bitrate set to 500 kb.  Opus used for audio codec.
+Opus used for audio codec.  Volume is boosted 1.5x since I didn't really find the default volume loud enough.  The slight 120 and 100 ms latency seemed to make streams nice and stable up to 1000 kb bitrate set in wz_mini.  With FFmpeg I was only able to get stable streams with the bitrate set to 500 kb.  Gstreamer also used less cpu and monitors and restarts itself versus FFmpeg.
 
 ### Gsreamer pipeline for hi res stream:
 ```
