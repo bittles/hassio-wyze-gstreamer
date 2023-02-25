@@ -4,7 +4,7 @@ url: https://github.com/bittles/hassio-wyze-gstreamer
 arch: 
   - aarch64
 slug: gstreamer-wyze
-version: 0.3
+version: 0.31
 init: false
 startup: application
 host_network: true
@@ -25,21 +25,18 @@ schema:
   cam2-password: str
   cam2-rtsp-ss-hi-res-path: str
   cam2-rtsp-ss-lo-res-path: str
-
-
-
 options:
   rtsp-simple-server-ip: 127.0.0.1
   rtsp-simple-server-port: 8554
-  cam1-ip: null
-  cam1-rtsp-port: null
-  cam1-username: null
-  cam1-password: null
-  cam1-rtsp-ss-hi-res-path: null
-  cam1-rtsp-ss-lo-res-path: null
-  cam2-ip: null
-  cam2-rtsp-port: null
-  cam2-username: null
-  cam2-password: null
-  cam2-rtsp-ss-hi-res-path: null
-  cam2-rtsp-ss-lo-res-path: null
+  cam1-ip: 0.0.0.0
+  cam1-rtsp-port: 8554
+  cam1-username: cam1username
+  cam1-password: cam1pass
+  cam1-rtsp-ss-hi-res-path: cam1-hi
+  cam1-rtsp-ss-lo-res-path: cam1-lo
+  cam2-ip: 0.0.0.0
+  cam2-rtsp-port: 8554
+  cam2-username: cam2username
+  cam2-password: cam2pass
+  cam2-rtsp-ss-hi-res-path: cam2-hi
+  cam2-rtsp-ss-lo-res-path: cam2-lo

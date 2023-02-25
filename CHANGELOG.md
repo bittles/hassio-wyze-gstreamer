@@ -1,3 +1,6 @@
+# 0.31
+- Fix config
+
 # 0.3
 - Add configurable options for 2 cams
 - Issues:
