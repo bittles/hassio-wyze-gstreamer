@@ -3,16 +3,16 @@ set -eu
 
 bashio::log.info "Starting Cam1 Hi Res Stream"
 # Create main config
-BUMPER_ANNOUNCE_IP=$(bashio::config 'announce_ip')
 
-RTSP_SIMPLE_SERVER_IP: match(([0-9])+(.+))
-RTSP_SIMPLE_SERVER_PORT: match(([0-9]))
-CAM1_IP: match(([0-9])+(.+))
-CAM1_RTSP_PORT: match(([0-9]))
-CAM1_USERNAME: str
-CAM1_PASSWORD: str
-CAM1_RTSP_SS_HI_RES_PATH: str
-CAM1_RTSP_SS_LO_RES_PATH: str
+
+RTSP_SIMPLE_SERVER_IP=$(bashio::config 'rtsp-simple-server-ip')
+RTSP_SIMPLE_SERVER_PORT=$(bashio::config 'rtsp-simple-server-port')
+CAM1_IP=$(bashio::config 'cam1-ip')
+CAM1_RTSP_PORT=$(bashio::config 'cam1-rtsp-port')
+CAM1_USERNAME=$(bashio::config 'cam1-username')
+CAM1_PASSWORD=$(bashio::config 'cam1-password')
+CAM1_RTSP_SS_HI_RES_PATH=$(bashio::config 'cam1-rtsp-ss-hi-res-path')
+CAM1_RTSP_SS_LO_RES_PATH=$(bashio::config 'cam1-rtsp-ss-lo-res-path')
 
 rm -f gstream-cam1-hi.log
 
