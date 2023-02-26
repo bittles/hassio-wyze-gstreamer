@@ -3,13 +3,13 @@ description: RTSP Server for Wyze
 url: https://github.com/bittles/hassio-wyze-gstreamer
 arch: 
   - aarch64
-slug: gstreamer-wyze-local
+slug: gstreamer-wyze
 version: 0.37
 init: false
 startup: application
 host_network: true
 ingress: false
-#image: bittles999/hass-gstreamer-wyze
+image: bittles999/hass-gstreamer-wyze
 schema:
   rtsp_simple_server_ip: match(([0-9])+(.+))
   rtsp_simple_server_port: match(([0-9]))
