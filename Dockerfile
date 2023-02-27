@@ -1,5 +1,12 @@
 FROM bittles999/hassio-gstreamer:ubuntu
 
+RUN \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+        tar \
+        gzip \
+        wget
+
 ARG GO2RTC_VERSION="v1.2.0"
 ARG NGROK_VERSION="v3-3.1.1"
 ARG GO2RTC_ARCH="aarch64"
