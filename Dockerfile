@@ -7,6 +7,7 @@ RUN \
         gzip \
         wget
 
+ARG BUILD_ARCH
 ARG GO2RTC_VERSION="v1.2.0"
 ARG NGROK_VERSION="v3-3.1.1"
 ARG GO2RTC_ARCH="aarch64"
