@@ -1,9 +1,5 @@
 #!/usr/bin/with-contenv bashio
 set -e
-bashio::log.info "Starting go2rtc"
-
-ADD_PATHS=$(bashio::config 'add_paths_to_config')
-
 # cam 1 vars
 CAM1_IP=$(bashio::config 'cam1_ip')
 CAM1_RTSP_PORT=$(bashio::config 'cam1_rtsp_port')
@@ -57,7 +53,7 @@ if ! bashio::fs.directory_exists '/share/wyze-go2rtc/'; then
 #    cp /defaultconfig/go2rtc.yaml /share/wyze-go2rtc/
 fi
 # add entries to go2rtc
-if bashio::config.true 'ADD_PATHS' || ! bashio::fs.file_exists '/share/wyze-go2rtc/go2rtc.yaml'; then
+if bashio::config.true 'add_paths_to_config' || ! bashio::fs.file_exists '/share/wyze-go2rtc/go2rtc.yaml'; then
     if bashio::fs.file_exists '/share/wyze-go2rtc/go2rtc.yaml'; then
         bashio::log.info "Backing up existing /share/wyze-go2rtc/go2rtc.yaml as /share/wyze-go2rtc/go2rtc.yaml.BAK"
         cp /share/wyze-go2rtc/go2rtc.yaml /share/wyze-go2rtc/go2rtc.yaml.BAK \
@@ -98,4 +94,5 @@ else
     bashio::log.info "Using existing go2rtc.yaml in /share/wyze-go2rtc/"
 fi
 
+bashio::log.info "Starting go2rtc"
 /usr/local/bin/go2rtc -config /share/wyze-go2rtc/go2rtc.yaml
