@@ -3,7 +3,7 @@ description: RTSP Server for Wyze
 url: https://github.com/bittles/hassio-wyze-gstreamer
 arch: 
   - aarch64
-slug: go2rtc-wyze
+slug: go2rtc-wyze-local
 version: 0.5
 init: false
 startup: application
@@ -12,45 +12,41 @@ audio: true
 ingress: true
 ingress_port: 1986
 host_network: true
+homeassistant_api: true
 #image: bittles999/hass-gstreamer-wyze
 map: [ "config:rw", "share:rw" ]
-ports:
-  8541/tcp: 8541
-  1986/tcp: 1986
-ports_description:
-  8541/tcp: Port for serving RTSP at x.x.x.x:<port>/camera1
-  1986/tcp: Port for go2rtc web interface (not needed for ingress)
+#ports:
+#  8554/tcp: 8554
+#  1986/tcp: null
+#  8665/tcp: null
+#  8665/udp: null
+#ports_description:
+#  8554/tcp: Serves RTSP at x.x.x.x:<port>/<path_name>
+#  1986/tcp: go2rtc api and web interface (not needed for ingress)
+#  8665/tcp: Webrtc port
+#  8665/udp: Webrtc port
 schema:
-  rtsp_simple_server_ip: match(([0-9])+(.+))
-  rtsp_simple_server_port: match(([0-9]))
+  add_paths_to_config: bool
   cam1_ip: match(([0-9])+(.+))
   cam1_rtsp_port: match(([0-9]))
   cam1_username: str
-  cam1_password: str
-  cam1_rtsp_ss_hi_res_path: str
-  cam1_rtsp_ss_lo_res_path: str
-  cam1_snapshot_name: str
-  cam2_ip: match(([0-9])+(.+))
-  cam2_rtsp_port: match(([0-9]))
-  cam2_username: str
-  cam2_password: str
-  cam2_rtsp_ss_hi_res_path: str
-  cam2_rtsp_ss_lo_res_path: str
-  cam2_snapshot_name: str
+  cam1_password: password
+  cam1_rtsp_hi_res_path: str
+  cam1_rtsp_lo_res_path: str?
+  cam1_snapshot_name: str?
+  cam2_ip: match(([0-9])+(.+))?
+  cam2_rtsp_port: match(([0-9]))?
+  cam2_username: str?
+  cam2_password: password?
+  cam2_rtsp_hi_res_path: str?
+  cam2_rtsp_lo_res_path: str?
+  cam2_snapshot_name: str?
 options:
-  rtsp_simple_server_ip: 127.0.0.1
-  rtsp_simple_server_port: 8554
+  add_paths_to_config: false
   cam1_ip: 0.0.0.0
   cam1_rtsp_port: 8554
   cam1_username: cam1username
   cam1_password: cam1pass
-  cam1_rtsp_ss_hi_res_path: cam1_hi
-  cam1_rtsp_ss_lo_res_path: cam1_lo
+  cam1_rtsp_hi_res_path: cam1_hi
+  cam1_rtsp_lo_res_path: cam1_lo
   cam1_snapshot_name: cam1
-  cam2_ip: 0.0.0.0
-  cam2_rtsp_port: 8554
-  cam2_username: cam2username
-  cam2_password: cam2pass
-  cam2_rtsp_ss_hi_res_path: cam2_hi
-  cam2_rtsp_ss_lo_res_path: cam2_lo
-  cam2_snapshot_name: cam2

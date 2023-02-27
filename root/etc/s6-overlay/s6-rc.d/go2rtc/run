@@ -2,10 +2,98 @@
 set -e
 bashio::log.info "Starting go2rtc"
 
-if [ ! -d /share/wyze-go2rtc ]; then
-    bashio::log.info "Copying default go2rtc.yaml to /share/wyze-go2rt/go2rtc.yaml"
-    mkdir /share/wyze-go2rtc
-    cp /defaultconfig/go2rtc.yaml /config/eufyp2p/
+ADD_PATHS=$(bashio::config 'add_paths_to_config')
+
+# cam 1 vars
+CAM1_IP=$(bashio::config 'cam1_ip')
+CAM1_RTSP_PORT=$(bashio::config 'cam1_rtsp_port')
+CAM1_USERNAME=$(bashio::config 'cam1_username')
+CAM1_PASSWORD=$(bashio::config 'cam1_password')
+CAM1_RTSP_HI_RES_PATH=$(bashio::config 'cam1_rtsp_hi_res_path')
+
+# build cam 1 hi res exec
+GST_CAM1_HI="  ${CAM1_RTSP_HI_RES_PATH}: exec:gst-launch-1.0 rtspsrc protocols=tcp location=rtsp://${CAM1_USERNAME}:${CAM1_PASSWORD}@${CAM1_IP}:${CAM1_RTSP_PORT}/video1_unicast latency=100 buffer-mode=3 connection-speed=2000 add-reference-timestamp-meta=true name=t t. ! queue ! capsfilter caps=application/x-rtp,media=video,height=1920,width=1080 ! queue ! rtph264depay ! h264parse ! h264timestamper ! queue ! rtspclientsink protocols=tcp latency=0 ntp-time-source=3 location={output} name=pay t. ! queue ! capsfilter caps=application/x-rtp,media=audio,clock-rate=16000,encoding-name=L16 ! rtpL16depay ! queue ! audioconvert ! queue ! audioresample ! audio/x-raw,channels=1,rate=16000 ! volume volume=1.5 ! opusenc bitrate=64000 packet-loss-percentage=50 inband-fec=true ! queue ! pay. -e\n\n"
+echo "$GST_CAM1_HI" > cam1_hi
+# check lo res and snapshot options
+if bashio::config.has_value 'cam2_rtsp_lo_res_path'; then
+    CAM1_RTSP_LO_RES_PATH=$(bashio::config 'cam1_rtsp_lo_res_path')
+    GST_CAM1_LO="  ${CAM1_RTSP_LO_RES_PATH}: exec:gst-launch-1.0 rtspsrc protocols=tcp location=rtsp://${CAM1_USERNAME}:${CAM1_PASSWORD}@${CAM1_IP}:${CAM1_RTSP_PORT}/video2_unicast latency=100 buffer-mode=3 connection-speed=1000 add-reference-timestamp-meta=true name=t t. ! queue ! capsfilter caps=application/x-rtp,media=video,height=640,width=360 ! queue ! rtph264depay ! h264parse ! h264timestamper ! queue ! rtspclientsink protocols=tcp latency=0 ntp-time-source=3 location={output} name=pay t. ! queue ! capsfilter caps=application/x-rtp,media=audio,clock-rate=8000,encoding-name=L16 ! rtpL16depay ! queue ! audioconvert ! queue ! audioresample ! audio/x-raw,channels=1,rate=8000 ! volume volume=1.5 ! opusenc bitrate=64000 packet-loss-percentage=50 inband-fec=true ! queue ! pay. -e\n\n"
+    echo "$GST_CAM1_LO" > cam1_lo
+fi
+if bashio::config.has_value 'cam1_snapshot_name'; then
+    CAM1_SNAPSHOT_NAME=$(bashio::config 'cam1_snapshot_name')
+    GST_CAM1_SNAP="  ${CAM1_RTSP_HI_RES_PATH}_snapshot: exec:gst-launch-1.0 rtspsrc protocols=tcp location=rtsp://127.0.0.1:8554/${CAM1_RTSP_HI_RES_PATH} latency=1000 ! rtph264depay ! avdec_h264 ! videorate ! video/x-raw,framerate=150/1001 ! jpegenc ! multifilesink location=/config/www/${CAM1_SNAPSHOT_NAME}.jpg -e\n\n"
+    echo "$GST_CAM1_SNAP" > cam1_snap
+fi
+# check vars for cam2
+if bashio::config.has_value 'cam2_ip' && bashio::config.has_value 'cam2_rtsp_port' && bashio::config.has_value 'cam2_username' && bashio::config.has_value 'cam2_password' && bashio::config.has_value 'cam2_rtsp_hi_res_path'; then
+    # cam 2 vars
+    CAM2_IP=$(bashio::config 'cam2_ip')
+    CAM2_RTSP_PORT=$(bashio::config 'cam2_rtsp_port')
+    CAM2_USERNAME=$(bashio::config 'cam2_username')
+    CAM2_PASSWORD=$(bashio::config 'cam2_password')
+    CAM2_RTSP_HI_RES_PATH=$(bashio::config 'cam2_rtsp_hi_res_path')
+
+    GST_CAM2_HI="  ${CAM2_RTSP_HI_RES_PATH}: exec:gst-launch-1.0 rtspsrc protocols=tcp location=rtsp://${CAM2_USERNAME}:${CAM2_PASSWORD}@${CAM2_IP}:${CAM2_RTSP_PORT}/video1_unicast latency=120 buffer-mode=3 connection-speed=2000 add-reference-timestamp-meta=true name=t t. ! queue ! capsfilter caps=application/x-rtp,media=video,height=1920,width=1080 ! queue ! rtph264depay ! h264parse ! h264timestamper ! queue ! rtspclientsink protocols=tcp latency=0 ntp-time-source=3 location={output} name=pay t. ! queue ! capsfilter caps=application/x-rtp,media=audio,clock-rate=16000,encoding-name=L16 ! rtpL16depay ! queue ! audioconvert ! queue ! audioresample ! audio/x-raw,channels=1,rate=16000 ! volume volume=1.5 ! opusenc bitrate=64000 packet-loss-percentage=50 inband-fec=true ! queue ! pay. -e\n\n"
+    echo "$GST_CAM2_HI" > cam2_hi
+    # check lo res option and snapshot options
+    if bashio::config.has_value 'cam2_rtsp_lo_res_path'; then
+        CAM2_RTSP_LO_RES_PATH=$(bashio::config 'cam2_rtsp_lo_res_path')
+        GST_CAM2_LO="  ${CAM2_RTSP_LO_RES_PATH}: exec:gst-launch-1.0 rtspsrc protocols=tcp location=rtsp://${CAM2_USERNAME}:${CAM2_PASSWORD}@${CAM2_IP}:${CAM2_RTSP_PORT}/video2_unicast latency=100 buffer-mode=3 connection-speed=1000 add-reference-timestamp-meta=true name=t t. ! queue ! capsfilter caps=application/x-rtp,media=video,height=640,width=360 ! queue ! rtph264depay ! h264parse ! h264timestamper ! queue ! rtspclientsink protocols=tcp latency=0 ntp-time-source=3 location={output} name=pay t. ! queue ! capsfilter caps=application/x-rtp,media=audio,clock-rate=8000,encoding-name=L16 ! rtpL16depay ! queue ! audioconvert ! queue ! audioresample ! audio/x-raw,channels=1,rate=16000 ! volume volume=1.5 ! opusenc bitrate=64000 packet-loss-percentage=50 inband-fec=true ! queue ! pay. -e\n\n"
+        echo "$GST_CAM2_LO" > cam2_lo
+    fi
+    if bashio::config.has_value 'cam2_snapshot_name'; then
+        CAM2_SNAPSHOT_NAME=$(bashio::config 'cam2_snapshot_name')
+        GST_CAM2_SNAP="  ${CAM2_RTSP_HI_RES_PATH}_snapshot: exec:gst-launch-1.0 rtspsrc protocols=tcp location=rtsp://127.0.0.1:8554/${CAM2_RTSP_HI_RES_PATH} latency=0 ! rtph264depay ! avdec_h264 ! videorate ! video/x-raw,framerate=150/1001 ! jpegenc ! multifilesink location=/config/www/${CAM2_SNAPSHOT_NAME}.jpg -e\n\n"
+        echo "$GST_CAM2_SNAP" > cam2_snap
+    fi
+fi
+
+
+if ! bashio::fs.directory_exists '/share/wyze-go2rtc/'; then
+    bashio::log.info "Creating config folder /share/wyze-go2rtc"
+    mkdir -p /share/wyze-go2rtc \
+        || bashio::exit.nok "Failed to create wyze-go2rtc configuration directory"
+#    cp /defaultconfig/go2rtc.yaml /share/wyze-go2rtc/
+fi
+# add entries to go2rtc
+if bashio::config.true 'ADD_PATHS' || ! bashio::fs.file_exists '/share/wyze-go2rtc/go2rtc.yaml'; then
+    if bashio::fs.file_exists '/share/wyze-go2rtc/go2rtc.yaml'; then
+        bashio::log.info "Backing up existing /share/wyze-go2rtc/go2rtc.yaml as /share/wyze-go2rtc/go2rtc.yaml.BAK"
+        cp /share/wyze-go2rtc/go2rtc.yaml /share/wyze-go2rtc/go2rtc.yaml.BAK \
+            || bashio::log.error "Failed to create backup of config file"
+    fi
+#    bashio::log.info "Overwriting /share/wyze-go2rtc/go2rtc.yaml with streams selected"
+    bashio::log.info "Adding ${CAM1_RTSP_HI_RES_PATH} to go2rtc streams"
+    cat cam1_hi >> /defaultconfig/go2rtc.yaml
+    rm cam1_hi
+    if [ -f cam1_lo ]; then
+        bashio::log.info "Adding ${CAM1_RTSP_LO_RES_PATH} to go2rtc streams"
+        cat cam1_lo >> /defaultconfig/go2rtc.yaml
+        rm cam1_lo
+    fi
+    if [ -f cam1_snap ]; then
+        bashio::log.info "Adding ${CAM1_RTSP_HI_RES_PATH}_snapshot to go2rtc streams"
+        cat cam1_snap >> /defaultconfig/go2rtc.yaml
+        rm cam1_snap
+    fi
+    if [ -f cam2_hi ]; then
+        bashio::log.info "Adding ${CAM2_RTSP_HI_RES_PATH} to go2rtc streams"
+        cat cam2_hi >> /defaultconfig/go2rtc.yaml
+        rm cam2_hi
+        if [ -f cam2_lo ]; then
+            bashio::log.info "Adding ${CAM2_RTSP_LO_RES_PATH} to go2rtc streams"
+            cat cam2_lo >> /defaultconfig/go2rtc.yaml
+            rm cam2_lo
+        fi
+        if [ -f cam2_snap ]; then
+            bashio::log.info "Adding ${CAM2_RTSP_HI_RES_PATH}_snapshot to go2rtc streams"
+            cat cam2_snap >> /defaultconfig/go2rtc.yaml
+            rm cam2_snap
+        fi
+    fi
+    bashio::log.info "Copying go2rtc.yaml to /share/wyze-go2rtc/go2rtc.yaml"
+    cp -f /defaultconfig/go2rtc.yaml /share/wyze-go2rtc/
 else
     bashio::log.info "Using existing go2rtc.yaml in /share/wyze-go2rtc/"
 fi

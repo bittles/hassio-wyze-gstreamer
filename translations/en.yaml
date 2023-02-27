@@ -1,0 +1,72 @@
+---
+configuration:
+  add_paths_to_config:
+    name: Add paths to go2rtc config file? (optional)
+    description: >-
+      If false, go2rtc config file won't be changed.  If true, 
+      config file will be overwritten with paths/streams for
+      the options entered
+  cam1_ip:
+    name: Camera 1 IP Address (required)
+    description: >-
+      Enter IP address of camera 1
+  cam1_rtsp_port:
+    name: Camera 1 RTSP Port (required)
+    description: >-
+      Enter RTSP Port of camera 1
+  cam1_username:
+    name: Camera 1 RTSP Username (required)
+    description: >-
+      Enter the username for RTSP for camera 1
+  cam1_password:
+    name: Camera 1 RTSP Password (required)
+    description: >-
+      Enter the username for RTSP for camera 1
+  cam1_rtsp_hi_res_path:
+    name: Camera 1 1080p Path Name (required)
+    description: >-
+      Enter the name given to the 1080p for camera 1 
+      (no spaces)
+  cam1_rtsp_lo_res_path:
+    name: Camera 1 640x360 Path Name (optional)
+    description: >-
+      Enter the name given to the 640x360 for camera 1 
+      (no spaces)
+  cam1_snapshot_name:
+    name: Camera 1 Snapshot jpg File Name (optional)
+    description: >-
+      If snapshots are wanted, you can name the file here.  It 
+      will be saved as /config/www/<filename>.jpg
+      (no spaces)
+  cam2_ip:
+    name: Camera 2 IP Address (optional, required if cam 2 wanted)
+    description: >-
+      Enter IP address of camera 2
+  cam2_rtsp_port:
+    name: Camera 2 RTSP Port (optional, required if cam 2 wanted)
+    description: >-
+      Enter RTSP Port of camera 2
+  cam2_username:
+    name: Camera 2 RTSP Username (optional, required if cam 2 wanted)
+    description: >-
+      Enter the username for RTSP for camera 2
+  cam2_password:
+    name: Camera 2 RTSP Password (optional, required if cam 2 wanted)
+    description: >-
+      Enter the username for RTSP for camera 2
+  cam2_rtsp_hi_res_path:
+    name: Camera 2 1080p Path Name (optional, required if cam 2 wanted)
+    description: >-
+      Enter the name given to the 1080p for camera 2 
+      (no spaces)
+  cam2_rtsp_lo_res_path:
+    name: Camera 2 640x360 Path Name (optional)
+    description: >-
+      Enter the name given to the 640x360 for camera 2 
+      (no spaces)
+  cam2_snapshot_name:
+    name: Camera 2 Snapshot jpg File Name (optional)
+    description: >-
+      If snapshots are wanted, you can name the file here.  It 
+      will be saved as /config/www/<filename>.jpg
+      (no spaces)

@@ -27,6 +27,7 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
     chmod a+x /usr/local/bin/*
+WORKDIR /defaultconfig
 
 ## add labels
 

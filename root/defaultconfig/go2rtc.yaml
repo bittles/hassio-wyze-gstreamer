@@ -2,15 +2,17 @@ api:
   listen: ":1986"
 
 rtsp:
-  listen: ":8954"
+  listen: ":8554"
+#  username: ""
+#  password: ""
 
 webrtc:
   listen: ":8665"
   candidates: []
   ice_servers:
-    - urls: [ "stun:stun.l.google.com:19302" ]
-      username: ""
-      credential: ""
+#    - urls: [ "stun:stun.l.google.com:19302" ]
+#      username: ""
+#      credential: ""
 
 hass:
   config: ""
@@ -21,10 +23,6 @@ log:
 
 #ngrok:
 #  command: ""
-
-
-#  username: ""
-#  password: ""
 
 #srtp:
 #  listen: ":8443"
