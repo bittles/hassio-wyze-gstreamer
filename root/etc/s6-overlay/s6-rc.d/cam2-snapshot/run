@@ -15,6 +15,5 @@ tail --pid $$ -F gstream-cam2-snapshot.log &
 
 gst-launch-1.0 rtspsrc protocols=tcp \
 location=rtsp://${RTSP_SIMPLE_SERVER_IP}:${RTSP_SIMPLE_SERVER_PORT}/${CAM2_RTSP_SS_HI_RES_PATH} \
-latency=1000 buffer-mode=3 connection-speed=2000 add-reference-timestamp-meta=true \
-rtph264depay ! avdec_h264 ! videorate ! video/x-raw,framerate=150/1001 ! \
+latency=0 ! rtph264depay ! avdec_h264 ! videorate ! video/x-raw,framerate=150/1001 ! \
 jpegenc ! multifilesink location=/config/www/${CAM2_SNAPSHOT_NAME}.jpg -e > gstream-cam2-snapshot.log
