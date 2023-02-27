@@ -8,18 +8,17 @@ rtsp:
 
 webrtc:
   listen: ":8665"
-  candidates: []
-  ice_servers:
+#  candidates: []
+#  ice_servers:
 #    - urls: [ "stun:stun.l.google.com:19302" ]
 #      username: ""
 #      credential: ""
 
-hass:
-  config: ""
 
-log:
-  format: ""
-  level: "info"
+
+#log:
+#  format: ""
+#  level: "info"
 
 #ngrok:
 #  command: ""
