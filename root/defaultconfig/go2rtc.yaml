@@ -24,8 +24,8 @@ log:
 #ngrok:
 #  command: ""
 
-#srtp:
-#  listen: ":8443"
+srtp:
+  listen: ":8449"
 
 
 streams: 
