@@ -1,16 +1,25 @@
-name: Wyze Gstreamer RTSP
+name: Wyze go2rtc RTSP Server with Gstreamer
 description: RTSP Server for Wyze
 url: https://github.com/bittles/hassio-wyze-gstreamer
 arch: 
   - aarch64
-slug: gstreamer-wyze-local
-version: 0.38
+slug: go2rtc-wyze
+version: 0.5
 init: false
 startup: application
+video: true
+audio: true
+ingress: true
+ingress_port: 1986
 host_network: true
-ingress: false
 #image: bittles999/hass-gstreamer-wyze
-map: [ "config:rw" ]
+map: [ "config:rw", "share:rw" ]
+ports:
+  8541/tcp: 8541
+  1986/tcp: 1986
+ports_description:
+  8541/tcp: Port for serving RTSP at x.x.x.x:<port>/camera1
+  1986/tcp: Port for go2rtc web interface (not needed for ingress)
 schema:
   rtsp_simple_server_ip: match(([0-9])+(.+))
   rtsp_simple_server_port: match(([0-9]))

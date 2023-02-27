@@ -1,0 +1,13 @@
+#!/usr/bin/with-contenv bashio
+set -e
+bashio::log.info "Starting go2rtc"
+
+if [ ! -d /share/wyze-go2rtc ]; then
+    bashio::log.info "Copying default go2rtc.yaml to /share/wyze-go2rt/go2rtc.yaml"
+    mkdir /share/wyze-go2rtc
+    cp /defaultconfig/go2rtc.yaml /config/eufyp2p/
+else
+    bashio::log.info "Using existing go2rtc.yaml in /share/wyze-go2rtc/"
+fi
+
+/usr/local/bin/go2rtc -config /share/wyze-go2rtc/go2rtc.yaml
